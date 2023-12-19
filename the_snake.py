@@ -12,7 +12,7 @@ GRID_WIDTH = SCREEN_WIDTH // GRID_SIZE
 GRID_HEIGHT = SCREEN_HEIGHT // GRID_SIZE
 
 # Направления движения
-UP = (0, -1)
+UP = (0, -1)    
 DOWN = (0, 1)
 LEFT = (-1, 0)
 RIGHT = (1, 0)
@@ -27,7 +27,7 @@ SPEED = 20
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), 0, 32)
 
 # Заголовок окна игрового поля
-pygame.display.set_caption('Змейка')
+pygame.display.set_caption("Змейка")
 
 # Настройка времени
 clock = pygame.time.Clock()
@@ -48,7 +48,7 @@ def main():
         ...
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
 
 
