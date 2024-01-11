@@ -35,9 +35,11 @@ clock = pygame.time.Clock()
 class GameObject:
     """Базовый класс для всех игровых объектов."""
 
-    def __init__(self, position=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)):
+    def __init__(self, position=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2),
+                 body_color=(255, 255, 255)):
         """Инициализирует объект с заданной позицией."""
         self.position = position
+        self.body_color = body_color
 
     def draw(self, surface):
         """Отрисовывает объект на поверхности."""
