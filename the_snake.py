@@ -9,6 +9,8 @@ SCREEN_WIDTH, SCREEN_HEIGHT = 640, 480
 GRID_SIZE = 20
 GRID_WIDTH = SCREEN_WIDTH // GRID_SIZE
 GRID_HEIGHT = SCREEN_HEIGHT // GRID_SIZE
+INITIAL_POSITION_X = SCREEN_WIDTH // 2
+INITIAL_POSITION_Y = SCREEN_HEIGHT // 2
 
 # Направления движения
 UP = (0, -1)
@@ -16,11 +18,14 @@ DOWN = (0, 1)
 LEFT = (-1, 0)
 RIGHT = (1, 0)
 
-# Цвета фона - черный
+# Цвета
 BOARD_BACKGROUND_COLOR = (0, 0, 0)
+COLOR_WHITE = (255, 255, 255)
+COLOR_RED = (255, 0, 0)
+COLOR_GREEN = (0, 255, 0)
 
 # Скорость движения змейки
-SPEED = 12
+SPEED = 7
 
 # Настройка игрового окна
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), 0, 32)
@@ -35,8 +40,8 @@ clock = pygame.time.Clock()
 class GameObject:
     """Базовый класс для всех игровых объектов."""
 
-    def __init__(self, position=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2),
-                 body_color=(255, 255, 255)):
+    def __init__(self, position=(INITIAL_POSITION_X, INITIAL_POSITION_Y),
+                 body_color=COLOR_WHITE):
         """Инициализирует объект с заданной позицией."""
         self.position = position
         self.body_color = body_color
@@ -51,8 +56,7 @@ class Apple(GameObject):
 
     def __init__(self):
         """Инициализирует яблоко и размещает его в случайной позиции."""
-        super().__init__()
-        self.body_color = (255, 0, 0)
+        super().__init__(body_color=COLOR_RED)
         self.randomize_position()
 
     def randomize_position(self):
@@ -75,13 +79,13 @@ class Snake(GameObject):
 
     def __init__(self):
         """Инициализирует змейку с начальными параметрами."""
-        super().__init__()
-        self.length = 2
+        super().__init__(position=(INITIAL_POSITION_X, INITIAL_POSITION_Y),
+                         body_color=COLOR_GREEN)
+        self.length = 1
         self.direction = RIGHT
         self.next_direction = None
-        self.positions = [self.position]
-        self.body_color = (0, 255, 0)
         self.last = None
+        self.positions = [self.position]
 
     def update_direction(self):
         """Обновляет направление движения змейки."""
@@ -109,8 +113,7 @@ class Snake(GameObject):
         x, y = self.positions[0]
         new_x = (x + self.direction[0] * GRID_SIZE) % SCREEN_WIDTH
         new_y = (y + self.direction[1] * GRID_SIZE) % SCREEN_HEIGHT
-        new_head = (new_x, new_y)
-        self.positions.insert(0, new_head)
+        self.positions.insert(0, (new_x, new_y))
         if len(self.positions) > self.length:
             self.positions.pop()
 
