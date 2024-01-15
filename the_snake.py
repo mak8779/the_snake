@@ -116,7 +116,7 @@ class Snake(GameObject):
 
     def move(self):
         """Перемещает змейку и удаляет последний элемент, если необходимо."""
-        x, y = self.positions[0]
+        x, y = self.get_head_position()
         new_x = (x + self.direction[0] * GRID_SIZE) % SCREEN_WIDTH
         new_y = (y + self.direction[1] * GRID_SIZE) % SCREEN_HEIGHT
         self.positions.insert(0, (new_x, new_y))
