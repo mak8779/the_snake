@@ -168,10 +168,6 @@ def main():
         if snake.get_head_position() == apple.position:
             snake.length += 1
             apple.randomize_position(snake.positions)
-        elif snake.last:
-            last_rect = pygame.Rect((snake.last[0], snake.last[1]),
-                                    (GRID_SIZE, GRID_SIZE))
-            pygame.draw.rect(screen, BOARD_BACKGROUND_COLOR, last_rect)
 
         # Проверка столкновения с собой
         for segment in snake.positions[1:]:
