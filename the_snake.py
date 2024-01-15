@@ -83,8 +83,7 @@ class Snake(GameObject):
 
     def __init__(self):
         """Инициализирует змейку с начальными параметрами."""
-        super().__init__(position=(INITIAL_POSITION_X, INITIAL_POSITION_Y),
-                         body_color=COLOR_GREEN)
+        super().__init__(body_color=COLOR_GREEN)
         self.length = 1
         self.direction = RIGHT
         self.next_direction = None
