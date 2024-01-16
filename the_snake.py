@@ -95,13 +95,6 @@ class Snake(GameObject):
 
     def draw(self, surface):
         """Отрисовывает змейку на игровом поле."""
-        for position in self.positions[:-1]:
-            rect = (
-                pygame.Rect((position[0], position[1]), (GRID_SIZE, GRID_SIZE))
-            )
-            pygame.draw.rect(surface, self.body_color, rect)
-            pygame.draw.rect(surface, BORDER_COLOR, rect, 1)
-
         # Отрисовка головы змейки
         head_rect = pygame.Rect(self.positions[0], (GRID_SIZE, GRID_SIZE))
         pygame.draw.rect(surface, self.body_color, head_rect)
@@ -171,9 +164,8 @@ def main():
             snake.length += 1
             apple.randomize_position()
 
-        while apple.position in snake.positions:
-            apple.position = (randint(0, GRID_WIDTH - 1) * GRID_SIZE,
-                              randint(0, GRID_HEIGHT - 1) * GRID_SIZE)
+            while apple.position in snake.positions:
+                apple.randomize_position()
 
         # Проверка столкновения с собой
         if snake.get_head_position() in snake.positions[1:]:
